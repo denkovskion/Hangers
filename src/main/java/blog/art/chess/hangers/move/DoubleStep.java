@@ -25,9 +25,7 @@
 package blog.art.chess.hangers.move;
 
 import blog.art.chess.hangers.piece.Piece;
-import blog.art.chess.hangers.position.Position;
 import java.util.List;
-import java.util.Set;
 
 public class DoubleStep extends Move {
 
@@ -42,17 +40,8 @@ public class DoubleStep extends Move {
   }
 
   @Override
-  protected boolean preMake(Position position) {
-    return true;
-  }
-
-  @Override
   protected void updateBoard(List<Piece> board) {
     board.set(target, board.set(origin, null));
-  }
-
-  @Override
-  protected void updateCastlingOrigins(Set<Integer> castlingOrigins) {
   }
 
   @Override

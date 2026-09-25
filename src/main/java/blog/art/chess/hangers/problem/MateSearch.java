@@ -24,9 +24,9 @@
 
 package blog.art.chess.hangers.problem;
 
+import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.move.Move;
 import blog.art.chess.hangers.move.NullMove;
-import blog.art.chess.hangers.position.Position;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

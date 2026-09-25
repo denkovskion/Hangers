@@ -24,8 +24,8 @@
 
 package blog.art.chess.hangers.move;
 
+import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.piece.Piece;
-import blog.art.chess.hangers.position.Position;
 import java.util.List;
 import java.util.Set;
 
@@ -59,11 +59,6 @@ public class Castling extends Move {
   protected void updateCastlingOrigins(Set<Integer> castlingOrigins) {
     castlingOrigins.remove(origin);
     castlingOrigins.remove(origin2);
-  }
-
-  @Override
-  protected Integer getEnPassantTarget() {
-    return null;
   }
 
   @Override

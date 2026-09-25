@@ -25,9 +25,7 @@
 package blog.art.chess.hangers.move;
 
 import blog.art.chess.hangers.piece.Piece;
-import blog.art.chess.hangers.position.Position;
 import java.util.List;
-import java.util.Set;
 
 public class EnPassant extends Move {
 
@@ -42,23 +40,9 @@ public class EnPassant extends Move {
   }
 
   @Override
-  protected boolean preMake(Position position) {
-    return true;
-  }
-
-  @Override
   protected void updateBoard(List<Piece> board) {
     board.set(stop, null);
     board.set(target, board.set(origin, null));
-  }
-
-  @Override
-  protected void updateCastlingOrigins(Set<Integer> castlingOrigins) {
-  }
-
-  @Override
-  protected Integer getEnPassantTarget() {
-    return null;
   }
 
   @Override

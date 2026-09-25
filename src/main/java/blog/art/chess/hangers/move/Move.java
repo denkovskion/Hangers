@@ -24,8 +24,8 @@
 
 package blog.art.chess.hangers.move;
 
+import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.piece.Piece;
-import blog.art.chess.hangers.position.Position;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,9 +37,9 @@ public abstract class Move {
     if (preMake(position)) {
       List<Piece> board = new ArrayList<>(position.getBoard());
       updateBoard(board);
+      boolean blackToMove = !position.isBlackToMove();
       Set<Integer> castlingOrigins = new HashSet<>(position.getCastlingOrigins());
       updateCastlingOrigins(castlingOrigins);
-      boolean blackToMove = !position.isBlackToMove();
       Integer enPassantTarget = getEnPassantTarget();
       Position result = new Position(board, blackToMove, castlingOrigins, enPassantTarget);
       if (isPositionLegal(result, pseudoLegalMoves)) {
@@ -49,13 +49,19 @@ public abstract class Move {
     return null;
   }
 
-  protected abstract boolean preMake(Position position);
+  protected boolean preMake(Position position) {
+    return true;
+  }
 
-  protected abstract void updateBoard(List<Piece> board);
+  protected void updateBoard(List<Piece> board) {
+  }
 
-  protected abstract void updateCastlingOrigins(Set<Integer> castlingOrigins);
+  protected void updateCastlingOrigins(Set<Integer> castlingOrigins) {
+  }
 
-  protected abstract Integer getEnPassantTarget();
+  protected Integer getEnPassantTarget() {
+    return null;
+  }
 
   public static boolean isPositionLegal(Position position, List<Move> pseudoLegalMoves) {
     return Piece.generateMoves(position.getBoard(), position.isBlackToMove(),

@@ -24,8 +24,8 @@
 
 package blog.art.chess.hangers;
 
+import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.parser.Parser;
-import blog.art.chess.hangers.position.Position;
 import blog.art.chess.hangers.problem.MateSearch;
 import blog.art.chess.hangers.problem.Perft;
 import java.io.BufferedReader;

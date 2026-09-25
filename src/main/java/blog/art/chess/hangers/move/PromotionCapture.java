@@ -25,7 +25,6 @@
 package blog.art.chess.hangers.move;
 
 import blog.art.chess.hangers.piece.Piece;
-import blog.art.chess.hangers.position.Position;
 import java.util.List;
 import java.util.Set;
 
@@ -42,11 +41,6 @@ public class PromotionCapture extends Move {
   }
 
   @Override
-  protected boolean preMake(Position position) {
-    return true;
-  }
-
-  @Override
   protected void updateBoard(List<Piece> board) {
     board.set(origin, null);
     board.set(target, promoted);
@@ -55,11 +49,6 @@ public class PromotionCapture extends Move {
   @Override
   protected void updateCastlingOrigins(Set<Integer> castlingOrigins) {
     castlingOrigins.remove(target);
-  }
-
-  @Override
-  protected Integer getEnPassantTarget() {
-    return null;
   }
 
   @Override

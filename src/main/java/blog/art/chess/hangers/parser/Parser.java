@@ -24,6 +24,7 @@
 
 package blog.art.chess.hangers.parser;
 
+import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.piece.Bishop;
 import blog.art.chess.hangers.piece.King;
 import blog.art.chess.hangers.piece.Knight;
@@ -31,7 +32,6 @@ import blog.art.chess.hangers.piece.Pawn;
 import blog.art.chess.hangers.piece.Piece;
 import blog.art.chess.hangers.piece.Queen;
 import blog.art.chess.hangers.piece.Rook;
-import blog.art.chess.hangers.position.Position;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;

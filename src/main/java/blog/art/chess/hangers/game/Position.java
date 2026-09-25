@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package blog.art.chess.hangers.position;
+package blog.art.chess.hangers.game;
 
 import blog.art.chess.hangers.piece.Piece;
 import java.util.ArrayList;

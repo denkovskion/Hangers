@@ -49,7 +49,7 @@ public abstract class Piece {
       Set<Integer> castlingOrigins, Integer enPassantTarget, List<Move> moves);
 
   public static String toUciCode(int square) {
-    return String.valueOf(new char[]{(char) ('a' + square / 8), (char) ('1' + square % 8)});
+    return new String(new char[]{(char) ('a' + square / 8), (char) ('1' + square % 8)});
   }
 
   public abstract String getUciCode();
