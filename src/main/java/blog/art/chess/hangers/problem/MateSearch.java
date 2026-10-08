@@ -28,6 +28,7 @@ import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.move.Move;
 import blog.art.chess.hangers.move.NullMove;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -65,8 +66,8 @@ public class MateSearch {
       }
       long end = System.currentTimeMillis();
       if (!variations.isEmpty()) {
-        variations.sort(Comparator.comparingInt(Variation::getValue));
-        Variation principalVariation = variations.get(0);
+        Variation principalVariation = Collections.min(variations,
+            Comparator.comparingInt(Variation::getValue));
         if (principalVariation.getValue() <= nMoves) {
           List<String> tokens = new ArrayList<>();
           for (Move move : principalVariation.getMoves()) {

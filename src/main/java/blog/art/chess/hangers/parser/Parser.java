@@ -44,61 +44,60 @@ import java.util.regex.MatchResult;
 public class Parser {
 
   public Position parseFen(String string) {
-    try (Scanner fields = new Scanner(string)) {
+    try {
+      Scanner fields = new Scanner(string);
       List<Piece> board = new ArrayList<>(Collections.nCopies(64, null));
-      try (Scanner characters = new Scanner(fields.next())) {
-        characters.useDelimiter("");
-        for (int rank = 8; rank >= 1; rank--) {
-          for (int file = 1; file <= 8; file++) {
-            if (characters.hasNext("[" + "12345678".substring(0, 8 - (file - 1)) + "]")) {
-              file += characters.nextInt();
-              if (file > 8) {
-                break;
-              }
-            }
-            String letter = characters.next("[KQRBNPkqrbnp]");
-            int square = (file - 1) * 8 + rank - 1;
-            switch (letter) {
-              case "K":
-                board.set(square, new King(false));
-                break;
-              case "Q":
-                board.set(square, new Queen(false));
-                break;
-              case "R":
-                board.set(square, new Rook(false));
-                break;
-              case "B":
-                board.set(square, new Bishop(false));
-                break;
-              case "N":
-                board.set(square, new Knight(false));
-                break;
-              case "P":
-                board.set(square, new Pawn(false));
-                break;
-              case "k":
-                board.set(square, new King(true));
-                break;
-              case "q":
-                board.set(square, new Queen(true));
-                break;
-              case "r":
-                board.set(square, new Rook(true));
-                break;
-              case "b":
-                board.set(square, new Bishop(true));
-                break;
-              case "n":
-                board.set(square, new Knight(true));
-                break;
-              case "p":
-                board.set(square, new Pawn(true));
-                break;
+      Scanner characters = new Scanner(fields.next()).useDelimiter("");
+      for (int rank = 8; rank >= 1; rank--) {
+        for (int file = 1; file <= 8; file++) {
+          if (characters.hasNext("[" + "12345678".substring(0, 8 - (file - 1)) + "]")) {
+            file += characters.nextInt();
+            if (file > 8) {
+              break;
             }
           }
-          characters.skip(rank > 1 ? "/" : "$");
+          String letter = characters.next("[KQRBNPkqrbnp]");
+          int square = (file - 1) * 8 + rank - 1;
+          switch (letter) {
+            case "K":
+              board.set(square, new King(false));
+              break;
+            case "Q":
+              board.set(square, new Queen(false));
+              break;
+            case "R":
+              board.set(square, new Rook(false));
+              break;
+            case "B":
+              board.set(square, new Bishop(false));
+              break;
+            case "N":
+              board.set(square, new Knight(false));
+              break;
+            case "P":
+              board.set(square, new Pawn(false));
+              break;
+            case "k":
+              board.set(square, new King(true));
+              break;
+            case "q":
+              board.set(square, new Queen(true));
+              break;
+            case "r":
+              board.set(square, new Rook(true));
+              break;
+            case "b":
+              board.set(square, new Bishop(true));
+              break;
+            case "n":
+              board.set(square, new Knight(true));
+              break;
+            case "p":
+              board.set(square, new Pawn(true));
+              break;
+          }
         }
+        characters.skip(rank > 1 ? "/" : "$");
       }
       boolean blackToMove = false;
       if (fields.hasNext("w")) {

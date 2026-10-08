@@ -56,10 +56,10 @@ public abstract class Piece {
 
   public static void validate(List<Piece> board, boolean blackToMove, Set<Integer> castlingOrigins,
       Integer enPassantTarget) {
-    for (boolean value : new boolean[]{false, true}) {
+    for (boolean black : new boolean[]{false, true}) {
       int frequency = 0;
       for (Piece piece : board) {
-        if (piece instanceof King && piece.isBlack() == value) {
+        if (piece instanceof King && piece.isBlack() == black) {
           frequency++;
         }
       }
