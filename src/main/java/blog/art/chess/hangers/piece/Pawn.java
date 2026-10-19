@@ -31,6 +31,7 @@ import blog.art.chess.hangers.move.Move;
 import blog.art.chess.hangers.move.Promotion;
 import blog.art.chess.hangers.move.PromotionCapture;
 import blog.art.chess.hangers.move.QuietMove;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -49,7 +50,7 @@ public class Pawn extends Piece {
 
   @Override
   protected boolean generateMoves(List<Piece> board, int origin, Set<Integer> castlingOrigins,
-      Integer enPassantTarget, List<Move> moves) {
+      Integer enPassantTarget, Collection<Move> moves) {
     int[] captureDirections = black ? new int[]{-9, 7} : new int[]{-7, 9};
     int maxOffset = 1;
     for (int direction : captureDirections) {

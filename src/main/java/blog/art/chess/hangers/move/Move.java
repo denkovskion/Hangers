@@ -27,13 +27,14 @@ package blog.art.chess.hangers.move;
 import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.piece.Piece;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public abstract class Move {
 
-  public Position make(Position position, List<Move> pseudoLegalMoves) {
+  public Position make(Position position, Collection<Move> pseudoLegalMoves) {
     if (preMake(position)) {
       List<Piece> board = new ArrayList<>(position.getBoard());
       updateBoard(board);
@@ -63,7 +64,7 @@ public abstract class Move {
     return null;
   }
 
-  public static boolean isPositionLegal(Position position, List<Move> pseudoLegalMoves) {
+  public static boolean isPositionLegal(Position position, Collection<Move> pseudoLegalMoves) {
     return Piece.generateMoves(position.getBoard(), position.isBlackToMove(),
         position.getCastlingOrigins(), position.getEnPassantTarget(), pseudoLegalMoves);
   }

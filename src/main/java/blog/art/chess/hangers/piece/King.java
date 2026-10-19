@@ -26,6 +26,7 @@ package blog.art.chess.hangers.piece;
 
 import blog.art.chess.hangers.move.Castling;
 import blog.art.chess.hangers.move.Move;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -44,7 +45,7 @@ public class King extends Leaper {
 
   @Override
   protected boolean generateMoves(List<Piece> board, int origin, Set<Integer> castlingOrigins,
-      Integer enPassantTarget, List<Move> moves) {
+      Integer enPassantTarget, Collection<Move> moves) {
     if (!super.generateMoves(board, origin, castlingOrigins, enPassantTarget, moves)) {
       return false;
     }

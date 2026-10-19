@@ -25,13 +25,14 @@
 package blog.art.chess.hangers.piece;
 
 import blog.art.chess.hangers.move.Move;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 public abstract class Piece {
 
   public static boolean generateMoves(List<Piece> board, boolean blackToMove,
-      Set<Integer> castlingOrigins, Integer enPassantTarget, List<Move> moves) {
+      Set<Integer> castlingOrigins, Integer enPassantTarget, Collection<Move> moves) {
     for (int origin = 0; origin < 64; origin++) {
       Piece piece = board.get(origin);
       if (piece != null && piece.isBlack() == blackToMove) {
@@ -46,7 +47,7 @@ public abstract class Piece {
   protected abstract boolean isBlack();
 
   protected abstract boolean generateMoves(List<Piece> board, int origin,
-      Set<Integer> castlingOrigins, Integer enPassantTarget, List<Move> moves);
+      Set<Integer> castlingOrigins, Integer enPassantTarget, Collection<Move> moves);
 
   public static String toUciCode(int square) {
     return new String(new char[]{(char) ('a' + square / 8), (char) ('1' + square % 8)});

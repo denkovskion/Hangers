@@ -27,10 +27,12 @@ package blog.art.chess.hangers.problem;
 import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.move.Move;
 import blog.art.chess.hangers.move.NullMove;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Queue;
 
 public class MateSearch {
 
@@ -44,11 +46,12 @@ public class MateSearch {
 
   public void solve() {
     long begin = System.currentTimeMillis();
-    List<Move> pseudoLegalMoves = new ArrayList<>();
+    Queue<Move> pseudoLegalMoves = new ArrayDeque<>();
     if (Move.isPositionLegal(position, pseudoLegalMoves)) {
       List<Variation> variations = new ArrayList<>();
-      for (Move move : pseudoLegalMoves) {
-        List<Move> pseudoLegalMovesMin = new ArrayList<>();
+      while (!pseudoLegalMoves.isEmpty()) {
+        Move move = pseudoLegalMoves.remove();
+        Queue<Move> pseudoLegalMovesMin = new ArrayDeque<>();
         Position positionMin = move.make(position, pseudoLegalMovesMin);
         if (positionMin != null) {
           Variation variationMin = searchMin(positionMin, nMoves, pseudoLegalMovesMin);
@@ -89,11 +92,12 @@ public class MateSearch {
   }
 
   private static Variation searchMax(Position positionMax, int nMoves,
-      List<Move> pseudoLegalMovesMax) {
+      Queue<Move> pseudoLegalMovesMax) {
     int valueMax = -1;
     List<Move> movesMax = new ArrayList<>();
-    for (Move moveMax : pseudoLegalMovesMax) {
-      List<Move> pseudoLegalMovesMin = new ArrayList<>();
+    while (!pseudoLegalMovesMax.isEmpty()) {
+      Move moveMax = pseudoLegalMovesMax.remove();
+      Queue<Move> pseudoLegalMovesMin = new ArrayDeque<>();
       Position positionMin = moveMax.make(positionMax, pseudoLegalMovesMin);
       if (positionMin != null) {
         Variation variationMin = searchMin(positionMin, nMoves, pseudoLegalMovesMin);
@@ -111,19 +115,20 @@ public class MateSearch {
   }
 
   private static Variation searchMin(Position positionMin, int nMoves,
-      List<Move> pseudoLegalMovesMin) {
+      Queue<Move> pseudoLegalMovesMin) {
     int valueMin = 0;
     List<Move> movesMin = new ArrayList<>();
     if (nMoves == 1) {
-      for (Move moveMin : pseudoLegalMovesMin) {
-        if (moveMin.make(positionMin, null) != null) {
+      while (!pseudoLegalMovesMin.isEmpty()) {
+        if (pseudoLegalMovesMin.remove().make(positionMin, null) != null) {
           valueMin = -1;
           break;
         }
       }
     } else {
-      for (Move moveMin : pseudoLegalMovesMin) {
-        List<Move> pseudoLegalMovesMax = new ArrayList<>();
+      while (!pseudoLegalMovesMin.isEmpty()) {
+        Move moveMin = pseudoLegalMovesMin.remove();
+        Queue<Move> pseudoLegalMovesMax = new ArrayDeque<>();
         Position positionMax = moveMin.make(positionMin, pseudoLegalMovesMax);
         if (positionMax != null) {
           Variation variationMax = searchMax(positionMax, nMoves - 1, pseudoLegalMovesMax);

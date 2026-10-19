@@ -26,8 +26,8 @@ package blog.art.chess.hangers.problem;
 
 import blog.art.chess.hangers.game.Position;
 import blog.art.chess.hangers.move.Move;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class Perft {
 
@@ -41,7 +41,7 @@ public class Perft {
 
   public void solve() {
     long begin = System.currentTimeMillis();
-    List<Move> pseudoLegalMoves = new ArrayList<>();
+    Queue<Move> pseudoLegalMoves = new ArrayDeque<>();
     if (Move.isPositionLegal(position, pseudoLegalMoves)) {
       long nNodes = count(position, nPlies, pseudoLegalMoves, true);
       long end = System.currentTimeMillis();
@@ -52,14 +52,15 @@ public class Perft {
     }
   }
 
-  private static long count(Position position, int nPlies, List<Move> pseudoLegalMoves,
+  private static long count(Position position, int nPlies, Queue<Move> pseudoLegalMoves,
       boolean verbose) {
     if (nPlies == 0) {
       return 1;
     }
     long nNodes = 0;
-    for (Move move : pseudoLegalMoves) {
-      List<Move> pseudoLegalMovesNext = new ArrayList<>();
+    while (!pseudoLegalMoves.isEmpty()) {
+      Move move = pseudoLegalMoves.remove();
+      Queue<Move> pseudoLegalMovesNext = new ArrayDeque<>();
       Position positionNext = move.make(position, pseudoLegalMovesNext);
       if (positionNext != null) {
         long nChildNodes = count(positionNext, nPlies - 1, pseudoLegalMovesNext, false);
