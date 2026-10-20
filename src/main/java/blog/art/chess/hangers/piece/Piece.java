@@ -79,11 +79,11 @@ public abstract class Piece {
       }
     }
     if (enPassantTarget != null) {
-      Piece captured = board.get(enPassantTarget + (blackToMove ? 1 : -1));
+      Piece other = board.get(enPassantTarget + (blackToMove ? 1 : -1));
       if (!(enPassantTarget % 8 + 1 == (blackToMove ? 3 : 6)
           && board.get(enPassantTarget + (blackToMove ? -1 : 1)) == null
-          && board.get(enPassantTarget) == null && captured instanceof Pawn
-          && captured.isBlack() != blackToMove)) {
+          && board.get(enPassantTarget) == null && other instanceof Pawn
+          && other.isBlack() != blackToMove)) {
         throw new IllegalArgumentException("Not accepted en passant square");
       }
     }

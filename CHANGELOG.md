@@ -1,6 +1,12 @@
 # Changelog
 
+## [1.1.1] - 2026-10-20
+
+- Maintenance release
+
 ## [1.1.0] - 2026-10-19
+
+### Changed
 
 - Search lists are now queues
 
